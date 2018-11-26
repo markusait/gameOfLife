@@ -79,3 +79,28 @@ import java.util.Random;
         }
         return sum;
     }
+    //getting the next State of a Cell based on the given rules
+    public static boolean getNextState(boolean[][] board, int x, int y) {
+    int livingNeighbors = countLivingNeighbors(board, x, y);
+    boolean cell = board[x][y];
+    if (!cell && livingNeighbors == 3) {
+        return true;
+    } else if (cell && (livingNeighbors == 3 || livingNeighbors == 2)) {
+        return true;
+    } else {
+        return false;
+    	}
+    }
+
+    //calculating the next Gen based on the next State of each cell from previous board
+    public static boolean[][] calculateNextGeneration(boolean[][] board){
+        int xLength = board.length;
+        int yLength = board[0].length;
+        boolean[][] res = new boolean[xLength][yLength];
+        for (int i = 0; i < xLength ; i++) {
+            for (int j = 0; j < yLength ; j++) {
+                res[i][j] = getNextState(board,i,j);
+            }
+        }
+        return res;
+    }
