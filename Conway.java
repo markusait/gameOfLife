@@ -104,3 +104,37 @@ import java.util.Random;
         }
         return res;
     }
+
+
+//setting up the board   
+boolean[][]board = random2DGrid(100,100);
+boolean[][]newBoard = calculateNextGeneration(board);
+
+
+//setting up the pane
+public void setup(){
+  size(1000,1000);  
+  background(0);
+}
+//drawing the next Gen with each Loop counting all Living cells
+public void draw(){
+  int resolution = 10;
+  newBoard =  calculateNextGeneration(newBoard);
+  int livingCells = 0;
+  for(int i = 0; i < newBoard.length; i++){
+    for(int j = 0; j < newBoard[0].length;j++){
+      if(newBoard[i][j]){
+      fill(255);
+      stroke(0);
+      rect(i*resolution, j*resolution, resolution - 1 , resolution - 1);
+      ++livingCells;
+      } else {
+      fill(0);
+      stroke(0);
+      rect(i*resolution,j*resolution,resolution - 1 ,resolution - 1);
+      }
+    }
+  }
+  System.out.println(livingCells);
+ 
+}
