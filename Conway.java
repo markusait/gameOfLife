@@ -37,3 +37,45 @@ import java.util.Random;
             System.out.println();
         }
     }
+
+
+
+    //helper function for countLivingNeighbors to apply boundaries roules
+    public static int adjuster(int num, int limit) {
+        if (num >= 0 && num <= limit) {
+            return num;
+        } else {
+            if (num > limit) {
+                return 0;
+            } else {
+                return limit;
+            }
+        }
+
+    }
+    //counting all 8 Neighbors of a cell in 2D Grid
+    public static int countLivingNeighbors(boolean[][] board, int x, int y) {
+        int dx;
+        int dy;
+        int xLength = board.length - 1;
+        int yLength = board[0].length -1;
+        int sum = 0;
+        int[][] moves = {
+                {-1, -1},
+                {-1, 0},
+                {-1, 1},
+                {0, -1},
+                {0, 1},
+                {1, -1},
+                {1, 0},
+                {1, 1}
+        };
+        for (int i = 0; i < moves.length; i++) {
+            dx = adjuster(x + moves[i][0], xLength - 1);
+            dy = adjuster(y + moves[i][1], yLength -1);
+            if(board[dx][dy]){
+                ++sum;
+            }
+        }
+        return sum;
+    }
